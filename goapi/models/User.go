@@ -8,7 +8,7 @@ type User struct {
 	UserID   uint    `gorm:"primaryKey;autoIncrement" json:"id"`
 	Name     *string `gorm:"type:varchar(255)" json:"name"`
 	Email    string  `gorm:"type:varchar(255);unique;not null" json:"email"`
-	Phone    uint    `gorm:"type:int;unique;not null" json:"phone"`
+	Phone    uint    `gorm:"type:int" json:"phone"`
 	Password string  `gorm:"type:varchar(255);not null" json:"password"`
 }
 

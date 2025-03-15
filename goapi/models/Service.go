@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Service struct {
+type S	ervice struct {
 	ServiceID       uint    `gorm:"primaryKey;autoIncrement" json:"id"`
 	Type 		  *string `gorm:"type:varchar(255)" json:"type"`
 	Category	  string  `gorm:"type:varchar(255)" json:"category"`
