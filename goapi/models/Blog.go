@@ -15,6 +15,6 @@ type Blog struct {
 }
 
 func MigrateBlog(db *gorm.DB) error {
-	err := db.AutoMigrate(&User{})
+	err := db.AutoMigrate(&Blog{})
 	return err
 }
