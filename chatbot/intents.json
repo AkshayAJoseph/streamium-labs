@@ -1,42 +1,191 @@
 {
-    "intents": [
+  "intents": [
       {
-        "tag": "greeting",
-        "patterns": ["Hi", "", "Hey there", "Good morning", "Good evening"],
-        "responses": ["Hello! How can I assist you today?", "Hi! How can I help?", "Hey! What brings you here?"]
+          "tag": "greeting",
+          "patterns": ["Hi", "hi", "Hello", "Hey there", "Good morning", "Good evening", "Hey"],
+          "responses": [
+              "Hello! Welcome to Streamium Labs. How can I assist you today?",
+              "Hi! I’m here to help with Streamium Labs’ services. What’s on your mind?",
+              "Hey! Excited to chat about live streaming, esports, and more. How can I help?"
+          ]
       },
       {
-        "tag": "goodbye",
-        "patterns": ["Bye", "See you", "Goodbye", "Catch you later"],
-        "responses": ["Goodbye! Have a great day!", "See you soon!", "Take care!"]
+          "tag": "goodbye",
+          "patterns": ["Bye", "See you", "Goodbye", "Catch you later", "Later"],
+          "responses": [
+              "Goodbye! Thanks for visiting Streamium Labs!",
+              "See you soon! Reach out anytime.",
+              "Take care! Hope to assist you again."
+          ]
       },
       {
-        "tag": "esports",
-        "patterns": ["Tell me about my match", "Upcoming esports matches", "Who am I playing against?", "Next gaming event?"],
-        "responses": ["Fetching your esports match details...", "Checking esports events for you...", "One moment, getting your gaming schedule."]
+          "tag": "about_us",
+          "patterns": ["Who are you?", "Tell me about Streamium Labs", "What does Streamium Labs do?", "Company info"],
+          "responses": [
+              "Streamium Labs specializes in live streaming, media production, digital marketing, event management, and esports services. We’re passionate about delivering top-notch experiences!",
+              "We’re Streamium Labs—a creative hub for virtual events, media, marketing, and esports. Want to know more?",
+              "Our mission at Streamium Labs is to innovate in media and events. Check out our services!"
+          ]
       },
       {
-        "tag": "jobs",
-        "patterns": ["What is my job application status?", "Have I been selected?", "Check my job update", "Any new job openings?"],
-        "responses": ["Checking job application status...", "Fetching job updates...", "Hold on, let me check the job database."]
+          "tag": "services_live_streaming",
+          "patterns": ["Tell me about live streaming", "What’s live streaming?", "Live stream services", "Virtual events"],
+          "responses": [
+              "Our live streaming services bring virtual and hybrid events to life with seamless broadcasts. Need details?",
+              "We offer top-tier live streaming for events—perfect for conferences or esports. Want to learn more?",
+              "Live streaming at Streamium Labs means high-quality virtual experiences. How can we assist?"
+          ]
       },
       {
-        "tag": "support",
-        "patterns": ["I need help", "Support please", "I have an issue", "Something is not working"],
-        "responses": ["Sure! What do you need help with?", "I'm here to assist. Please describe the issue."]
+          "tag": "services_media_production",
+          "patterns": ["What’s media production?", "Tell me about videography", "Photography services", "Media editing"],
+          "responses": [
+              "Our media production includes videography, photography, and editing—crafted to tell your story.",
+              "We produce stunning videos and photos at Streamium Labs. Interested in a project?",
+              "From shooting to editing, our media production team has you covered. What’s your vision?"
+          ]
       },
       {
-        "tag": "fun",
-        "patterns": ["Tell me a joke", "Make me laugh", "Give me a fun fact"],
-        "responses": [
-          "Why did the computer go to therapy? It had too many bugs!",
-          "Did you know? Honey never spoils. Archaeologists found pots of honey in ancient Egyptian tombs that were over 3,000 years old—and still perfectly good!"
-        ]
+          "tag": "services_digital_marketing",
+          "patterns": ["Digital marketing info", "What’s your marketing service?", "SEO help", "Social media management"],
+          "responses": [
+              "Our digital marketing boosts your brand with SEO, social media management, and ad campaigns.",
+              "We handle digital marketing—think social media, ads, and SEO. How can we grow your presence?",
+              "Streamium Labs’ marketing services drive results online. Want a strategy?"
+          ]
       },
       {
-        "tag": "fallback",
-        "patterns": [],
-        "responses": ["I'm sorry, I didn't quite understand that. Could you please rephrase?"]
+          "tag": "services_event_management",
+          "patterns": ["Event management details", "Plan an event", "How do you manage events?", "Event services"],
+          "responses": [
+              "We plan and execute events seamlessly, from concept to completion. Planning something?",
+              "Our event management ensures every detail shines. Tell me about your event!",
+              "Streamium Labs makes events unforgettable. Need help organizing one?"
+          ]
+      },
+      {
+          "tag": "esports_events",
+          "patterns": ["Upcoming esports matches", "Next esports event", "Tell me about esports", "Esports schedule"],
+          "responses": [
+              "Fetching the latest esports events for you...",
+              "Here’s the next esports match details...",
+              "Checking our esports schedule—stay tuned!"
+          ]
+      },
+      {
+          "tag": "esports_registration",
+          "patterns": ["How do I register for esports?", "Sign up for a match", "Esports registration fee", "Join esports"],
+          "responses": [
+              "To register for an esports event, provide your details and pay the fee. Ready to sign up?",
+              "Esports registration is easy—tell me your name and preferred event!",
+              "Each esports event has a unique fee. Want to join one?"
+          ]
+      },
+      {
+          "tag": "esports_contact",
+          "patterns": ["Contact my opponent", "How do I reach my match partner?", "Esports match details"],
+          "responses": [
+              "I’ll help you connect with your opponent. What’s your match ID?",
+              "Provide your event details, and I’ll facilitate contact with your match partner.",
+              "Let’s get you in touch with your esports opponent—give me some info!"
+          ]
+      },
+      {
+          "tag": "portfolio",
+          "patterns": ["Show me your portfolio", "Past projects", "What have you done?", "Work examples"],
+          "responses": [
+              "Our portfolio includes live streamed events, media productions, and more. Want specifics?",
+              "Check out our past projects—live streams, videos, and events. Which category interests you?",
+              "Streamium Labs has a rich portfolio. Interested in our live stream highlights?"
+          ]
+      },
+      {
+          "tag": "blog",
+          "patterns": ["Latest blog posts", "What’s on your blog?", "Blog articles", "Recent updates"],
+          "responses": [
+              "Our blog covers digital marketing trends, event tips, and more. Want the latest post?",
+              "Fetching the latest from our blog—stay tuned!",
+              "Explore our blog for insights on media and esports. What topic interests you?"
+          ]
+      },
+      {
+          "tag": "contact",
+          "patterns": ["How do I contact you?", "Get in touch", "Send a message", "Contact info"],
+          "responses": [
+              "You can reach us via our contact form—name, email, phone, and message. Ready to send?",
+              "Contact Streamium Labs at info@streamiumlabs.com or call us at (555) 123-4567!",
+              "Fill out our contact form or email us. How can I assist with your inquiry?"
+          ]
+      },
+      {
+          "tag": "jobs_openings",
+          "patterns": ["Any job openings?", "What jobs are available?", "Hiring now?", "Join Streamium Labs"],
+          "responses": [
+              "Checking our current job openings for you...",
+              "We’re always looking for talent! Want to see available positions?",
+              "Fetching the latest job postings at Streamium Labs..."
+          ]
+      },
+      {
+          "tag": "jobs_apply",
+          "patterns": ["How do I apply for a job?", "Submit job application", "Apply now", "Job interest"],
+          "responses": [
+              "To apply, tell me your name, email, and the position you’re interested in!",
+              "Job applications are easy—share your details, and I’ll guide you.",
+              "Ready to join us? Provide your info, and let’s get started."
+          ]
+      },
+      {
+          "tag": "support",
+          "patterns": ["I need help", "Support please", "I have an issue", "Something’s not working"],
+          "responses": [
+              "I’m here to help! What issue are you facing?",
+              "Tell me what’s wrong, and I’ll assist you.",
+              "Support is my specialty—what do you need help with?"
+          ]
+      },
+      {
+          "tag": "support_followup",
+          "patterns": ["It’s still not working", "More help please", "That didn’t fix it"],
+          "responses": [
+              "Let’s try another approach—what’s happening now?",
+              "Sorry it’s not resolved yet. Describe the issue again?",
+              "I’ll keep helping—what’s the next step you tried?"
+          ]
+      },
+      {
+          "tag": "fun_joke",
+          "patterns": ["Tell me a joke", "Make me laugh", "Say something funny"],
+          "responses": [
+              "Why did the camera blush? It saw too many flashes!",
+              "Why don’t editors sleep? Too many cuts to make!"
+          ]
+      },
+      {
+          "tag": "fun_fact",
+          "patterns": ["Give me a fun fact", "Tell me something interesting", "Cool fact"],
+          "responses": [
+              "Did you know? The shortest war in history lasted 38 minutes!",
+              "Live streaming uses more internet bandwidth than all cat videos combined!"
+          ]
+      },
+      {
+          "tag": "social_media",
+          "patterns": ["Your social media", "Follow you online", "Social links", "Where’s Streamium Labs online?"],
+          "responses": [
+              "Follow us on Facebook, Twitter, Instagram, and LinkedIn—links on our site!",
+              "We’re active on social media—check us out on Instagram or Twitter!",
+              "Connect with Streamium Labs online—find us on all major platforms!"
+          ]
+      },
+      {
+          "tag": "fallback",
+          "patterns": [],
+          "responses": [
+              "I’m sorry, I didn’t catch that. Could you rephrase it?",
+              "Hmm, not sure what you mean. Try again?",
+              "Oops, I’m stumped! Can you say it differently?"
+          ]
       }
-    ]
-  }  
+  ]
+}
