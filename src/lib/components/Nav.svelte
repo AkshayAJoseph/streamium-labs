@@ -1,0 +1,58 @@
+<script></script>
+
+<main>
+    <nav>
+        <div class="nav__logo">
+            <div class="logo">
+                <p>THE</p>
+                <h5>STREAMIUM</h5>
+                <p class="labs end">LABS</p>
+            </div>
+        </div>
+        <div class="nav__links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+</main>
+
+<style>
+    nav {
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        z-index: 100;
+        transition: top 0.3s ease; /* Transition only top */
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)
+        );
+        position: fixed;
+        top: 0;
+    }
+
+    .logo p {
+        font-size: 0.5rem;
+    }
+
+    .logo h5 {
+        font-size: 1rem;
+    }
+
+    .nav__links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav__links a {
+        font-size: 0.9rem;
+    }
+
+    .nav__links a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.25rem;
+    }
+</style>
