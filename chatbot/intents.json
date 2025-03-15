@@ -1,0 +1,42 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": ["Hi", "", "Hey there", "Good morning", "Good evening"],
+        "responses": ["Hello! How can I assist you today?", "Hi! How can I help?", "Hey! What brings you here?"]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Bye", "See you", "Goodbye", "Catch you later"],
+        "responses": ["Goodbye! Have a great day!", "See you soon!", "Take care!"]
+      },
+      {
+        "tag": "esports",
+        "patterns": ["Tell me about my match", "Upcoming esports matches", "Who am I playing against?", "Next gaming event?"],
+        "responses": ["Fetching your esports match details...", "Checking esports events for you...", "One moment, getting your gaming schedule."]
+      },
+      {
+        "tag": "jobs",
+        "patterns": ["What is my job application status?", "Have I been selected?", "Check my job update", "Any new job openings?"],
+        "responses": ["Checking job application status...", "Fetching job updates...", "Hold on, let me check the job database."]
+      },
+      {
+        "tag": "support",
+        "patterns": ["I need help", "Support please", "I have an issue", "Something is not working"],
+        "responses": ["Sure! What do you need help with?", "I'm here to assist. Please describe the issue."]
+      },
+      {
+        "tag": "fun",
+        "patterns": ["Tell me a joke", "Make me laugh", "Give me a fun fact"],
+        "responses": [
+          "Why did the computer go to therapy? It had too many bugs!",
+          "Did you know? Honey never spoils. Archaeologists found pots of honey in ancient Egyptian tombs that were over 3,000 years old—and still perfectly good!"
+        ]
+      },
+      {
+        "tag": "fallback",
+        "patterns": [],
+        "responses": ["I'm sorry, I didn't quite understand that. Could you please rephrase?"]
+      }
+    ]
+  }  
