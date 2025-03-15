@@ -9,17 +9,18 @@
         <Nav />
         <article class="hero">
             <div class="hero__text">
-                <h1>GET READY TO</h1>
-                <h5><span>KILL. </span> WIN. RACE.</h5>
+                <h5>WHO<span>DOOOOGE </span> DI.</h5>
+                <h1>MARKETING</h1>
             </div>
-            <img src="/car-removed.png" alt="car" />
+            <img src="/girl-removed.png" alt="car" />
+            <div class="hero__box"></div>
         </article>
     </section>
 </main>
 
 <style>
     section {
-        background: url("/car.jpeg");
+        background: url("/girl.jpg");
         background-size: cover;
         height: 100vh;
         position: relative; /* Needed for absolute positioning of overlay */
@@ -33,10 +34,10 @@
         height: 100%;
         background: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.5)
         );
-        animation: breathe 2s infinite linear;
+        animation: breathe 5s infinite linear;
     }
 
     @keyframes breathe {
@@ -53,8 +54,6 @@
         }
     }
 
-    /* Rest of your CSS remains the same */
-
     .hero {
         position: relative;
     }
@@ -66,11 +65,9 @@
     }
 
     .hero__text {
-        position: absolute;
-        top: 20vh;
-        left: 10vw;
-        transform: rotate(-1deg);
-        font-size: 10rem;
+        text-align: center;
+        padding-top: 10rem;
+        font-size: 12rem;
     }
 
     .hero__text h1,
@@ -79,8 +76,13 @@
         font-family: "Inter";
     }
 
+    .hero__text h5 {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .hero__text h5 span {
         font-style: italic;
-        color: var(--color-esports);
+        color: var(--color-labs);
     }
 </style>
