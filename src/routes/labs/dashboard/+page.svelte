@@ -13,7 +13,6 @@
                 <h1>MARKETING</h1>
             </div>
             <img src="/girl-removed.png" alt="car" />
-            <div class="hero__box"></div>
         </article>
     </section>
 </main>

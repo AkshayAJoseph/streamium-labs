@@ -12,14 +12,14 @@
                 <h1>GET READY TO</h1>
                 <h5><span>KILL. </span> WIN. RACE.</h5>
             </div>
-            <img src="/car-removed.png" alt="car" />
+            <img src="/car-removed-nobs.png" alt="car" />
         </article>
     </section>
 </main>
 
 <style>
     section {
-        background: url("/car.jpeg");
+        background: url("/car-nobs.jpeg");
         background-size: cover;
         height: 100vh;
         position: relative; /* Needed for absolute positioning of overlay */
