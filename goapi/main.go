@@ -32,7 +32,7 @@ func main() {
 	models.MigrateBlog(db)
 
 	routes.UserRoutes(db, app)
-	
+	routes.BlogRoutes(db, app)
 
 	app.Listen(":8080")
 }
