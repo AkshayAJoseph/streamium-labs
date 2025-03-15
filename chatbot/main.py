@@ -16,7 +16,6 @@ class Message(BaseModel):
 
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 translator = Translator()
-
 #lang_detector = fasttext.load_model("lid.176.bin")  
 
 file_path = os.path.join(os.path.dirname(__file__), "intents.json")
@@ -36,21 +35,35 @@ for intent in intents_data["intents"]:
 
 user_sessions = {}
 
-def fetch_esports_data():
+def fetch_esports_data(tag: str):
+    """Fetch esports-related data based on intent tag."""
     try:
-        mock_data = {"match_name": "Championship Finals", "time": "3 PM", "team1": "Team A", "team2": "Team B"}
-        return f"Upcoming match: {mock_data['match_name']} at {mock_data['time']} between {mock_data['team1']} and {mock_data['team2']}."
+        if tag == "esports_events":
+            mock_data = {"match_name": "Championship Finals", "time": "3 PM", "team1": "Team A", "team2": "Team B"}
+            return f"Upcoming match: {mock_data['match_name']} at {mock_data['time']} between {mock_data['team1']} and {mock_data['team2']}."
+        elif tag == "esports_registration":
+            return "Registration for esports is open! Fee: $20. Provide your name and email to sign up."
+        elif tag == "esports_contact":
+            return "To contact your opponent, provide your match ID (e.g., M123). I’ll simulate a connection: 'Contact Team B at teamB@example.com'."
+        else:
+            return "Sorry, I couldn’t process that esports request."
     except Exception as e:
         print(f"Esports API error: {e}")
-        return "Sorry, I couldn't retrieve esports match details at the moment."
+        return "Sorry, I couldn't retrieve esports details at the moment."
 
-def fetch_job_status():
+def fetch_job_status(tag: str):
+    """Fetch job-related data based on intent tag."""
     try:
-        mock_data = {"job_title": "Software Engineer", "status": "under review"}
-        return f"Your job application for {mock_data['job_title']} is currently {mock_data['status']}."
+        if tag == "jobs_openings":
+            mock_data = {"job1": "Video Editor", "job2": "Event Coordinator"}
+            return f"Current openings: {mock_data['job1']} and {mock_data['job2']}. Interested in applying?"
+        elif tag == "jobs_apply":
+            return "To apply, provide your name, email, and desired position (e.g., 'Video Editor'). I’ll record it!"
+        else:
+            return "Sorry, I couldn’t process that job request."
     except Exception as e:
         print(f"Jobs API error: {e}")
-        return "Sorry, I couldn't retrieve job application status at the moment."
+        return "Sorry, I couldn't retrieve job details at the moment."
 
 def get_response(user_message: str, session_id: str) -> str:
     """Process user input and generate chatbot response."""
@@ -59,19 +72,19 @@ def get_response(user_message: str, session_id: str) -> str:
 
     try:
         lang_prediction = lang_detector.predict(user_message.replace('\n', ' '))
-        lang = lang_prediction[0][0].replace('__label__', '')  
+        lang = lang_prediction[0][0].replace('__label__', '')
         confidence = lang_prediction[1][0]
         print(f"Detected language: {lang} (confidence: {confidence:.2f})")
-        if confidence < 0.9:  
-            print("Low confidence in language detection, defaulting to English")
+        if confidence < 0.9:
+            print("Low confidence, defaulting to English")
             lang = "en"
     except Exception as e:
         print(f"Language detection error: {e}")
-        lang = "en"  
+        lang = "en"
 
-    try:
-        user_message_en = translator.translate(user_message, dest="en").text if lang != "en" else user_message
-    except Exception as e:
+    #try:
+        #user_message_en = translator.translate(user_message, dest="en").text if lang != "en" else user_message
+    #except Exception as e:
         print(f"Translation error: {e}")
         user_message_en = user_message
 
@@ -84,12 +97,12 @@ def get_response(user_message: str, session_id: str) -> str:
         return "Sorry, something went wrong on my end. Please try again."
 
     if score < 0.5:
-        response_text = random.choice(responses.get("fallback", ["I'm sorry, I didn't quite understand that. Could you please rephrase?"]))
+        response_text = random.choice(responses.get("fallback", ["I'm sorry, I didn’t quite understand that. Could you please rephrase?"]))
     else:
-        if tag == "esports":
-            response_text = fetch_esports_data()
-        elif tag == "jobs":
-            response_text = fetch_job_status()
+        if tag in ["esports_events", "esports_registration", "esports_contact"]:
+            response_text = fetch_esports_data(tag)  
+        elif tag in ["jobs_openings", "jobs_apply"]:
+            response_text = fetch_job_status(tag)  
         else:
             response_text = random.choice(responses[tag])
 
@@ -100,7 +113,7 @@ def get_response(user_message: str, session_id: str) -> str:
     try:
         #if lang != "en":
             #return translator.translate(response_text, dest=lang).text
-        return response_text  
+        return response_text
     except Exception as e:
         print(f"Response translation error: {e}")
         return response_text
