@@ -261,4 +261,47 @@
     .services__text p {
         line-height: 1.8;
     }
+    @media only screen and (max-width: 640px) {
+        .box {
+            scroll-snap-type: initial;
+        }
+        section {
+            background-position: center;
+        }
+        .hero img {
+            object-fit: cover;
+        }
+        .hero__text {
+            padding-top: 5rem;
+        }
+        .hero__text h1 {
+            font-size: 4rem;
+        }
+        .hero__text h5 {
+            font-size: 2rem;
+        }
+        .about__info {
+            flex-direction: column;
+        }
+        .about__info > * {
+            width: calc(100% - 4rem);
+            margin-left: 2rem;
+        }
+        .about__title h1,
+        .services__title h1 {
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+        .about__banner img {
+            height: 40vh;
+        }
+        .services__row {
+            flex-direction: column;
+            padding: 2rem;
+        }
+        .services__column {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
 </style>

@@ -98,4 +98,25 @@
         font-size: 1.2rem;
         font-weight: 500;
     }
+    @media only screen and (max-width: 640px) {
+        section {
+            background-position: center;
+        }
+        .hero img {
+            object-fit: cover;
+            height: 100vh;
+        }
+        .hero__text {
+            padding-top: 3rem;
+        }
+        .hero__text h1 {
+            font-size: 4.5rem;
+        }
+        .hero__text h5 {
+            font-size: 2rem;
+        }
+        .stream {
+            left: 50%;
+        }
+    }
 </style>

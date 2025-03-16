@@ -7,6 +7,11 @@
         <Sidebar />
         <section>
             <h1>Dashboard</h1>
+            <div class="logo">
+                <p>THE</p>
+                <h5>STREAMIUM</h5>
+                <p class="labs end">LABS</p>
+            </div>
             <article class="card">
                 <h5>Welcome to your dashboard!</h5>
                 <p>Manage your services here</p>

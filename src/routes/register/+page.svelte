@@ -38,9 +38,7 @@
                 <div class="login__row">
                     <input type="submit" value="Submit" />
                     <p>
-                        Already have an account? <a href="/register"
-                            >Login Here</a
-                        >
+                        Already have an account? <a href="/login">Login Here</a>
                     </p>
                 </div>
             </div>
@@ -144,6 +142,23 @@
         }
         to {
             transform: rotate(360deg);
+        }
+    }
+    @media only screen and (max-width: 640px) {
+        .login {
+            flex-direction: column;
+        }
+        .login > * {
+            width: 100%;
+        }
+        .login__banner {
+            width: 50%;
+        }
+        .login__form {
+            margin-right: 0;
+            margin: 2rem;
+            width: calc(100% - 2rem);
+            padding-bottom: 20vh;
         }
     }
 </style>

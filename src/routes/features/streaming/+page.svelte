@@ -1,6 +1,7 @@
 <script>
-  import { getLive } from "../../../script";
+  import { fetchYesterdayMatches, getLive } from "../../../script";
   import { onMount } from "svelte";
+  import { fetchLiveMatches } from "../../../script";
 
   let lives = [];
 
@@ -11,6 +12,10 @@
     } catch (error) {
       console.error("Error fetching live:", error);
     }
+
+    
+    await fetchLiveMatches();
+    await fetchYesterdayMatches();
   }
 
   // Run function when the component is mounted
