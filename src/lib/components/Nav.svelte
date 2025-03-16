@@ -10,9 +10,9 @@
             </div>
         </div>
         <div class="nav__links">
-            <a href="/labs/dashboard/#about">About</a>
-            <a href="/labs/dashboard/#services">Services</a>
-            <a href="/labs/dashboard/#contact">Contact</a>
+            <a href="/labs/#about">About</a>
+            <a href="/labs/#services">Services</a>
+            <a href="/labs/#contact">Contact</a>
             <a href="/login" class="solid">Login</a>
         </div>
     </nav>

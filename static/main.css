@@ -96,3 +96,21 @@ header .header__logo {
 header .header__logo img {
     width: 80%;
 }
+
+article.card {
+    margin-top: 1rem;
+    background: #070707;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 3px solid #0a0a0a;
+    transition: border ease 0.3s;
+}
+
+article.card:hover {
+    border: 3px solid var(--color-labs);
+}
+
+article.card h5 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}

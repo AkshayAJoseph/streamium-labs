@@ -15,7 +15,7 @@
                 setTimeout(() => {
                     showContent = false;
                     setTimeout(() => {
-                        goto("/esports/dashboard");
+                        goto("/esports");
                     }, 300);
                 }, 5000);
             }, 10);

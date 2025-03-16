@@ -15,7 +15,7 @@
                 setTimeout(() => {
                     showContent = false;
                     setTimeout(() => {
-                        goto("/labs/dashboard");
+                        goto("/labs");
                     }, 300);
                 }, 5000);
             }, 10);
