@@ -12,7 +12,10 @@
                 <h1>GET READY TO</h1>
                 <h5><span>KILL. </span> WIN. RACE.</h5>
             </div>
-            <img src="/car-removed-nobs.png" alt="car" />
+            <img src="/car-removed.png" alt="car" />
+            <div class="stream">
+                <a href="/dashboard/stream">Stream Now</a>
+            </div>
         </article>
     </section>
 </main>
@@ -53,8 +56,6 @@
         }
     }
 
-    /* Rest of your CSS remains the same */
-
     .hero {
         position: relative;
     }
@@ -64,7 +65,6 @@
         top: 0;
         width: 100vw;
     }
-
     .hero__text {
         position: absolute;
         top: 20vh;
@@ -82,5 +82,20 @@
     .hero__text h5 span {
         font-style: italic;
         color: var(--color-esports);
+    }
+    .stream {
+        position: absolute;
+        bottom: -95vh;
+        left: 10vw;
+        transform: translateX(-45%);
+        padding: 1rem 2rem;
+        border-radius: 10rem;
+        text-align: center;
+        background: white;
+        color: black;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 </style>

@@ -10,9 +10,10 @@
             </div>
         </div>
         <div class="nav__links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+            <a href="/labs/dashboard/#about">About</a>
+            <a href="/labs/dashboard/#services">Services</a>
+            <a href="/labs/dashboard/#contact">Contact</a>
+            <a href="/login" class="solid">Login</a>
         </div>
     </nav>
 </main>
@@ -44,15 +45,25 @@
 
     .nav__links {
         display: flex;
-        gap: 1rem;
+        align-items: center;
+        gap: 2rem;
     }
 
     .nav__links a {
         font-size: 0.9rem;
+        font-weight: 500;
     }
 
     .nav__links a:hover {
         text-decoration: underline;
         text-underline-offset: 0.25rem;
+    }
+
+    .solid {
+        background: white;
+        color: black;
+        height: min-content;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
     }
 </style>
