@@ -157,4 +157,11 @@ const response = await fetch(`${baseUrl}/job`, {
     return res.data;
 }
 
-  export { login , signup, checkUser, getService, getBlog, addBlog, getJob};
+async function logout() {
+    await Storage.remove({ key
+        : "token" });
+    goto("/login", { replaceState: true
+    });
+}
+
+  export { login , signup, checkUser, getService, getBlog, addBlog, getJob, logout};
