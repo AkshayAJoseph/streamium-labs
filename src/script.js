@@ -58,7 +58,7 @@ async function setToken(token) {
     const { value } = await Storage.get({ key: "token" });
     console.log(value);
     if (!value) {
-      goto("login", { replaceState: true });
+      goto("/login", { replaceState: true });
       return;
     }
     const response = await fetch(`${baseUrl}/verify`, {
@@ -91,5 +91,70 @@ async function setToken(token) {
     return res2.data;
   }
 
+    async function getService() {
+        const response = await fetch(`${baseUrl}/service`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const res = await response.json();
+          if (!response.ok) {
+            alert(res.message);
+            return;
+          }
+            console.log('done')
+            return res.data;
+    }
 
-  export { login , signup, checkUser};
+
+    async function getBlog() {
+        const response = await fetch(`${baseUrl}/blog`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const res = await response.json();
+          if (!response.ok) {
+            alert(res.message);
+            return;
+          }
+            console.log('done')
+            return res.data;
+    }
+
+
+async function addBlog(data){
+    const response = await fetch(`${baseUrl}/blog`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+          if (!response.ok) {
+            alert(res.message);
+            return;
+          }
+            console.log(res.data)
+}
+
+async function getJob() {
+const response = await fetch(`${baseUrl}/job`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    });
+    const res = await response.json();
+    if (!response.ok) {
+    alert(res.message);
+    return;
+    }
+    console.log('done')
+    return res.data;
+}
+
+  export { login , signup, checkUser, getService, getBlog, addBlog, getJob};

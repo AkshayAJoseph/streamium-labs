@@ -1,26 +1,15 @@
 <script>
-  // Dummy data
-  let data = [
-    { id: 1, type: "Movie", category: "media", status: "available", price: 10 },
-    {
-      id: 2,
-      type: "Book",
-      category: "education",
-      status: "out of stock",
-      price: 15,
-    },
-    { id: 3, type: "Music", category: "media", status: "available", price: 8 },
-    {
-      id: 4,
-      type: "Game",
-      category: "entertainment",
-      status: "available",
-      price: 20,
-    },
-  ];
+  //done
+  import { getService } from "../../../../script";
+  let data;
 
-  // Filter only media category
-  let mediaItems = data.filter((item) => item.category === "media");
+  const dogetService = async () => {
+    data = await getService();
+    data = data.filter((item) => item.type === "Media");
+    console.log(data);
+  };
+
+  dogetService();
 </script>
 
 <h1>Past Media projects</h1>
