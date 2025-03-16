@@ -10,14 +10,11 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Dropout
 
-# Ensure required NLTK data is downloaded
 nltk.download("punkt")
 nltk.download("wordnet")
 
-# Initialize FastAPI app
 app = FastAPI()
 
-# Load intents
 with open("intents.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
