@@ -141,4 +141,20 @@ async function addBlog(data){
             console.log(res.data)
 }
 
-  export { login , signup, checkUser, getService, getBlog, addBlog};
+async function getJob() {
+const response = await fetch(`${baseUrl}/job`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    });
+    const res = await response.json();
+    if (!response.ok) {
+    alert(res.message);
+    return;
+    }
+    console.log('done')
+    return res.data;
+}
+
+  export { login , signup, checkUser, getService, getBlog, addBlog, getJob};
