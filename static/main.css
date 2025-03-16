@@ -3,6 +3,7 @@
 :root {
     --color-labs: #ffc481;
     --color-esports: #ff76dd;
+    --color-text: #666;
 }
 
 * {
@@ -11,10 +12,15 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: black;
     color: white;
     font-family: "Inter";
+    scroll-behavior: smooth;
 }
 
 h1,
@@ -31,8 +37,16 @@ a {
     color: inherit;
 }
 
+p {
+    color: var(--color-text);
+}
+
 .logo {
     width: fit-content;
+}
+
+.logo p {
+    color: white;
 }
 
 .logo h5 {
