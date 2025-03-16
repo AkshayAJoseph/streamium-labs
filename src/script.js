@@ -91,5 +91,20 @@ async function setToken(token) {
     return res2.data;
   }
 
+    async function getService() {
+        const response = await fetch(`${baseUrl}/service`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const res = await response.json();
+          if (!response.ok) {
+            alert(res.message);
+            return;
+          }
+            console.log('done')
+            return res.data;
+    }
 
-  export { login , signup, checkUser};
+  export { login , signup, checkUser, getService};

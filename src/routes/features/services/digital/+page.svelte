@@ -1,39 +1,16 @@
-<script>
-  // Dummy data
-  let data = [
-    {
-      id: 1,
-      type: "Media",
-      category: "Videography",
-      status: "available",
-      price: 150,
-    },
-    { id: 2, type: "Digital", category: "SEO", status: "active", price: 180 },
-    {
-      id: 3,
-      type: "Digital",
-      category: "Social Media Management",
-      status: "available",
-      price: 250,
-    },
-    {
-      id: 4,
-      type: "Event",
-      category: "Planning",
-      status: "ongoing",
-      price: 400,
-    },
-    {
-      id: 5,
-      type: "Digital",
-      category: "Ad Campaigns",
-      status: "available",
-      price: 220,
-    },
-  ];
 
-  // Filter only Digital category
-  let digitalItems = data.filter((item) => item.type === "Digital");
+<script>
+    //done
+  import { getService } from "../../../../script";
+  let data;
+
+  const dogetService = async () => {
+    data = await getService();
+    data = data.filter((item) => item.type === "Digital");
+    console.log(data);
+  };
+
+  dogetService();
 </script>
 
 <h1>Digital Services</h1>
@@ -52,5 +29,5 @@
 
 <!-- Add Button -->
 <a href="/features/services/add">
-    <button>add</button>
-  </a>
+  <button>add</button>
+</a>
