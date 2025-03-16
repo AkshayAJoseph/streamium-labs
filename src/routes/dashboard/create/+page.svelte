@@ -154,4 +154,15 @@
     .card {
         width: 50%;
     }
+    @media only screen and (max-width: 640px) {
+        .box {
+            flex-direction: column;
+        }
+        .box > * {
+            width: 100%;
+        }
+        section > h1 {
+            padding-bottom: 5rem;
+        }
+    }
 </style>

@@ -15,6 +15,7 @@
             <a href="/labs/#about">About</a>
             <a href="/labs/#services">Services</a>
             <a href="/labs/#contact">Contact</a>
+            <a href="/blog">Blog</a>
             <a href="/login" class="solid">Login</a>
         </div>
     </nav>

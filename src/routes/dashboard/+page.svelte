@@ -32,4 +32,19 @@
     section h1 {
         font-size: 4rem;
     }
+    @media only screen and (max-width: 640px) {
+        .box {
+            flex-direction: column;
+        }
+        .box > * {
+            width: 100%;
+        }
+        section > h1 {
+            padding-bottom: 5rem;
+        }
+        .logo {
+            margin: auto;
+            margin-bottom: 5rem;
+        }
+    }
 </style>

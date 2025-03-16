@@ -98,4 +98,15 @@
         margin: 2rem 0;
         border-radius: 10rem;
     }
+    @media only screen and (max-width: 640px) {
+        .box {
+            flex-direction: column;
+        }
+        .box > * {
+            width: 100%;
+        }
+        section > h1 {
+            padding-bottom: 5rem;
+        }
+    }
 </style>
