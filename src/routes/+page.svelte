@@ -50,4 +50,17 @@
     .logo:hover {
         transform: rotate(-1deg);
     }
+
+    @media only screen and (max-width: 640px) {
+        section {
+            flex-direction: column;
+        }
+        article {
+            padding: 10rem;
+        }
+        a:last-child article {
+            border-left: 2px solid transparent;
+            border-top: 2px solid #111;
+        }
+    }
 </style>

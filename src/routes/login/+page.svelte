@@ -147,4 +147,22 @@
             transform: rotate(360deg);
         }
     }
+
+    @media only screen and (max-width: 640px) {
+        .login {
+            flex-direction: column;
+        }
+        .login > * {
+            width: 100%;
+        }
+        .login__banner {
+            width: 50%;
+        }
+        .login__form {
+            margin-right: 0;
+            margin: 2rem;
+            width: calc(100% - 2rem);
+            padding-bottom: 20vh;
+        }
+    }
 </style>

@@ -68,4 +68,19 @@
         padding: 0.5rem 1rem;
         border-radius: 1rem;
     }
+    @media only screen and (max-width: 640px) {
+        nav {
+            justify-content: center;
+            padding: 1rem;
+        }
+        .logo h5 {
+            font-size: 1.5rem;
+        }
+        .logo p {
+            font-size: 0.75rem;
+        }
+        .nav__links {
+            display: none;
+        }
+    }
 </style>
