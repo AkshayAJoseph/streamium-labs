@@ -17,10 +17,17 @@ html {
 }
 
 body {
-    background: black;
     color: white;
     font-family: "Inter";
     scroll-behavior: smooth;
+    background: black;
+    background: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 40px,
+        #090909 40px,
+        #090909 40.65px
+    );
 }
 
 h1,
@@ -85,6 +92,7 @@ header .header__logo {
     align-items: center;
     justify-content: center;
 }
+
 header .header__logo img {
     width: 80%;
 }

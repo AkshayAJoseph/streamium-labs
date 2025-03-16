@@ -17,6 +17,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@capacitor/core": "^7.1.0",
 		"@capacitor/storage": "^1.2.5",
 		"@sveltejs/adapter-static": "^3.0.8"
 	}

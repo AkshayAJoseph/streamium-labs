@@ -247,7 +247,9 @@
 
     .services__text {
         padding: 1rem;
-        background-color: #11111166;
+        background-color: #060606;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
     }
 
     .services__text h5 {
