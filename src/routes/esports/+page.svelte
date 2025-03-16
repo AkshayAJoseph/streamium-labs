@@ -1,5 +1,6 @@
 <script>
     import Nav from "$lib/components/Nav.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
 </script>
 
 <main>
@@ -7,6 +8,9 @@
     <section>
         <div class="overlay"></div>
         <Nav />
+        <div class="chat">
+            <ChatBot />
+        </div>
         <article class="hero">
             <div class="hero__text">
                 <h1>GET READY TO</h1>
@@ -21,6 +25,10 @@
 </main>
 
 <style>
+    .chat {
+        position: absolute;
+        z-index: 99;
+    }
     section {
         background: url("/car-nobs.jpeg");
         background-size: cover;
@@ -64,6 +72,7 @@
         position: absolute;
         top: 0;
         width: 100vw;
+        z-index: 98;
     }
     .hero__text {
         position: absolute;

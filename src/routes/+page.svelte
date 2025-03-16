@@ -39,7 +39,7 @@
     }
 
     a:last-child article {
-        border-left: 2px solid #111;
+        border-left: 2px solid var(--color-light-black);
     }
 
     .logo {
@@ -60,7 +60,7 @@
         }
         a:last-child article {
             border-left: 2px solid transparent;
-            border-top: 2px solid #111;
+            border-top: 2px solid var(--color-light-black);
         }
     }
 </style>

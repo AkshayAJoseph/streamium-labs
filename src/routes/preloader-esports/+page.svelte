@@ -52,7 +52,7 @@
         width: 100%;
         font-size: 1rem;
         color: transparent;
-        background-color: #111;
+        background-color: var(--color-light-black);
         position: relative;
         border-radius: 1rem;
         overflow: hidden;

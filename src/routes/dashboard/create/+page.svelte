@@ -133,7 +133,7 @@
         display: block;
         width: 100%;
         padding: 1rem 2rem;
-        background: #111;
+        background: var(--color-light-black);
         -webkit-appearance: none;
         color: var(--color-white);
         border: 0;
@@ -149,7 +149,7 @@
         padding: 1rem 2rem;
         border-radius: 10rem;
         width: 100%;
-        background: #111;
+        background: var(--color-light-black);
         border: 0;
         color: var(--color-white);
         margin-top: 1rem;
@@ -182,7 +182,7 @@
         display: block;
         width: 100%;
         padding: 1rem 2rem;
-        background: #111;
+        background: var(--color-light-black);
         -webkit-appearance: none;
         color: var(--color-white);
         border: 0;

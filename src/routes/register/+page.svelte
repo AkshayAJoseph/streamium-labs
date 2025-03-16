@@ -36,7 +36,7 @@
                     />
                 </div>
                 <div class="login__row">
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" {onclick} />
                     <p>
                         Already have an account? <a href="/login">Login Here</a>
                     </p>
@@ -102,7 +102,7 @@
         width: 100%;
         padding: 1rem;
         border-radius: 0.5rem;
-        background: #111;
+        background: var(--color-light-black);
         border: 0;
         font-family: "Inter";
         font-size: 1rem;

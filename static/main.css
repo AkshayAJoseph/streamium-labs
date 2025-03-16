@@ -1,11 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 :root {
-    --color-labs: #ffc481;
-    --color-esports: #ff76dd;
-    --color-text: #666;
-    --color-white: #fff;
+    --color-labs: #f9a825;
+    --color-esports: #e91e63;
+    --color-text: #333;
+    --color-white: #f8f8f8;
     --color-black: #000;
+    --color-light-black: #222;
+    --color-dark-black: #202020;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-labs: #ffc481;
+        --color-esports: #ff76dd;
+        --color-text: #666;
+        --color-white: #fff;
+        --color-black: #000;
+        --color-light-black: #111;
+        --color-dark-black: #010101;
+    }
 }
 
 * {
