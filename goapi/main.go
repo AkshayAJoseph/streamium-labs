@@ -32,11 +32,13 @@ func main() {
 	models.MigrateBlog(db)
 	models.MigrateService(db)
 	models.MigrateJob(db)
+	models.MigrateLive(db)
 
 	routes.UserRoutes(db, app)
 	routes.BlogRoutes(db, app)
 	routes.ServiceRoutes(db, app)
 	routes.JobRoutes(db, app)
+	routes.LiveRoutes(db, app)
 
 	app.Listen(":8080")
 }

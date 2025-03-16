@@ -26,7 +26,7 @@ async function setToken(token) {
         return;
       }
       await setToken(res.token);
-      goto("/features/dashboard", { replaceState: true });
+      goto("/dashboard", { replaceState: true });
     } catch (error) {
       console.log(error);
     }
@@ -157,6 +157,22 @@ const response = await fetch(`${baseUrl}/job`, {
     return res.data;
 }
 
+async function getLive() {
+    const response = await fetch(`${baseUrl}/live`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        const res = await response.json();
+        if (!response.ok) {
+        alert(res.message);
+        return;
+        }
+        console.log(res)
+        return res.data;
+    }
+
 async function logout() {
     await Storage.remove({ key
         : "token" });
@@ -164,4 +180,73 @@ async function logout() {
     });
 }
 
-  export { login , signup, checkUser, getService, getBlog, addBlog, getJob, logout};
+async function fetchLiveMatches() {
+    const API_KEY = "HcdhRC6J2dtLthJ6LDnM_-SyCMVRnsOi9InrUvnfKdi49xCzO1M"; // Replace with your Pandascore API key
+    const url = `https://api.pandascore.co/matches/running?token=${API_KEY}`;
+
+    try {
+        const response = await fetch(url);
+        const matches = await response.json();
+
+        matches.forEach(match => {
+            console.log(`Game: ${match.videogame.name}`);
+            console.log(`Teams: ${match.opponents[0]?.opponent.name} vs ${match.opponents[1]?.opponent.name}`);
+            console.log(`Score: ${match.results[0]?.score} - ${match.results[1]?.score}`);
+            console.log("--------");
+        });
+    } catch (error) {
+        console.error("Error fetching matches:", error);
+    }
+    
+}
+
+async function fetchYesterdayMatches() {
+    const API_KEY = "HcdhRC6J2dtLthJ6LDnM_-SyCMVRnsOi9InrUvnfKdi49xCzO1M"; // Replace with your Pandascore API key
+   const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dateStr = yesterday.toISOString().split("T")[0];
+    let data =[]
+ 
+
+    const url = `https://api.pandascore.co/matches/past?range[begin_at]=${dateStr}T00:00:00Z,${dateStr}T23:59:59Z&token=${API_KEY}`;
+
+        const response = await fetch(url);
+        const matches = await response.json();
+
+        matches.forEach(match => {
+            const game = match.videogame.name;
+        
+            const team1 = match.opponents[0]?.opponent.name || "TBD";
+            const team1Logo = match.opponents[0]?.opponent.image_url || null;
+
+            const team2 = match.opponents[1]?.opponent.name || "TBD";
+            const team2Logo = match.opponents[1]?.opponent.image_url || null;
+
+            const team1Score = match.results[0]?.score || 0;
+            const team2Score = match.results[1]?.score || 0
+
+          data.push({game, team1, team1Logo, team2, team2Logo, team1Score, team2Score});
+        });
+        console.log(data)
+        return data
+}
+
+async function addService(data) {
+  const response = await fetch(`${baseUrl}/service`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(response)
+  const res = await response.json();
+  if (!response.ok) {
+    alert(res.message);
+    return;
+  }
+  console.log('added success')
+
+}
+
+  export { login , signup, checkUser, getService, getBlog, addBlog, getJob, logout, getLive, fetchLiveMatches, fetchYesterdayMatches ,addService};

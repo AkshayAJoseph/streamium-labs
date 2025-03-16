@@ -1,6 +1,7 @@
 <script>
     import Sidebar from "$lib/components/Sidebar.svelte";
     import { onMount } from "svelte";
+    import { addService } from "../../../script";
 
     const typeCategoryMap = {
         "Live Streaming": [
@@ -38,6 +39,12 @@
         let selected = categories.find((c) => c.category === category);
         price = selected ? selected.price : 0;
     }
+
+    const handlesubmit = () => {
+        const data = { type, category, price };
+        console.log(data);
+        addService(data);
+    };
 
     onMount(() => {
         updateCategories();
@@ -89,7 +96,11 @@
                         />
                     </div>
                     <div class="form__row">
-                        <input type="submit" value="Submit" />
+                        <input
+                            type="submit"
+                            on:click={handlesubmit}
+                            value="Submit"
+                        />
                     </div>
                 </div>
             </article>
@@ -164,5 +175,43 @@
         section > h1 {
             padding-bottom: 5rem;
         }
+    }
+    .form select {
+        margin-top: 0.5rem;
+        margin-bottom: 2rem;
+        display: block;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: #111;
+        -webkit-appearance: none;
+        color: white;
+        border: 0;
+        border-radius: 10rem;
+        font-family: "Inter";
+        font-size: 1rem;
+    }
+    .form__row {
+        margin-bottom: 1rem;
+    }
+    .form input {
+        display: block;
+        padding: 1rem 2rem;
+        border-radius: 10rem;
+        width: 100%;
+        background: #111;
+        border: 0;
+        color: white;
+        margin-top: 1rem;
+        font-family: "Inter";
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .form input[type="submit"] {
+        margin-top: 5rem;
+        background: white;
+        color: black;
+    }
+    .card {
+        width: 50%;
     }
 </style>

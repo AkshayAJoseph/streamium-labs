@@ -5,7 +5,7 @@
 
     const dogetService = async () => {
         data = await getService();
-        data = data.filter((item) => item.type === "Live");
+        data = data.filter((item) => item.type === "Live Streaming");
         console.log(data);
     };
 

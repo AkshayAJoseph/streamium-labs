@@ -5,7 +5,7 @@
 
     const dogetService = async () => {
         data = await getService();
-        data = data.filter((item) => item.type === "Event");
+        data = data.filter((item) => item.type === "Event Management");
         console.log(data);
     };
 
