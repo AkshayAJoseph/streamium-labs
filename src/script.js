@@ -157,6 +157,22 @@ const response = await fetch(`${baseUrl}/job`, {
     return res.data;
 }
 
+async function getLive() {
+    const response = await fetch(`${baseUrl}/live`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        const res = await response.json();
+        if (!response.ok) {
+        alert(res.message);
+        return;
+        }
+        console.log(res)
+        return res.data;
+    }
+
 async function logout() {
     await Storage.remove({ key
         : "token" });
@@ -164,4 +180,4 @@ async function logout() {
     });
 }
 
-  export { login , signup, checkUser, getService, getBlog, addBlog, getJob, logout};
+  export { login , signup, checkUser, getService, getBlog, addBlog, getJob, logout, getLive};
