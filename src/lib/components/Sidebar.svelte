@@ -1,4 +1,6 @@
 <script>
+    export let selected = "";
+    import { logout } from "../../script";
 </script>
 
 <main>
@@ -6,33 +8,50 @@
         <div class="links">
             <div class="links__top">
                 <h5>Services</h5>
-                <div class="links__row">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Live Stream</p>
-                </div>
-                <div class="links__row super">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Media Production</p>
-                </div>
-                <div class="links__row">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Event Management</p>
-                </div>
-                <h5>Miscellenous</h5>
-                <div class="links__row">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Profile Managment</p>
-                </div>
-                <div class="links__row">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Apply for Jobs</p>
-                </div>
+                <a href="/dashboard/live">
+                    <div class="links__row" class:super={selected === "live"}>
+                        <img src="/live-alt.svg" alt="icon" />
+                        <p>Live Stream</p>
+                    </div>
+                </a>
+                <a href="/dashboard/media">
+                    <div class="links__row" class:super={selected === "media"}>
+                        <img src="/heart.svg" alt="icon" />
+                        <p>Media Production</p>
+                    </div>
+                </a>
+                <a href="/dashboard/events">
+                    <div class="links__row" class:super={selected === "events"}>
+                        <img src="/calendar-star.svg" alt="icon" />
+                        <p>Event Management</p>
+                    </div>
+                </a>
+
+                <h5>Miscellaneous</h5>
+                <a href="/dashboard/profile">
+                    <div
+                        class="links__row"
+                        class:super={selected === "profile"}
+                    >
+                        <img src="/user-trust.svg" alt="icon" />
+                        <p>Profile Management</p>
+                    </div>
+                </a>
+
+                <a href="/dashboard/hiring">
+                    <div class="links__row" class:super={selected === "hiring"}>
+                        <img src="/person-cv.svg" alt="icon" />
+                        <p>Apply for Jobs</p>
+                    </div>
+                </a>
             </div>
             <div class="links__bottom">
-                <div class="links__row end">
-                    <img src="/github.svg" alt="icon" />
-                    <p>Logout</p>
-                </div>
+                <a onclick={logout}>
+                    <div class="links__row end">
+                        <img src="/github.svg" alt="icon" />
+                        <p>Logout</p>
+                    </div>
+                </a>
             </div>
         </div>
     </aside>

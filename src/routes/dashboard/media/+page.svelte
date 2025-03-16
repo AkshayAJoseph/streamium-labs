@@ -5,7 +5,7 @@
 
     const dogetService = async () => {
         data = await getService();
-        data = data.filter((item) => item.type === "Event");
+        data = data.filter((item) => item.type === "Media");
         console.log(data);
     };
 
@@ -14,9 +14,9 @@
 
 <main>
     <div class="box">
-        <Sidebar selected="events" />
+        <Sidebar selected="media" />
         <section>
-            <h1>Events</h1>
+            <h1>Media</h1>
             <a href="/dashboard/create" class="btn--create">Create New</a>
             <article class="card">
                 <h5>Your Event History</h5>

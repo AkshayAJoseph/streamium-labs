@@ -1,4 +1,6 @@
-<script></script>
+<script>
+    export let selected;
+</script>
 
 <main>
     <nav>
