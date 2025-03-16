@@ -1,4 +1,5 @@
 <script>
+  //done
   import { signup } from "../../../script";
 
   let email = $state("");
