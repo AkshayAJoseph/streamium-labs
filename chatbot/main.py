@@ -1,132 +1,117 @@
 import json
 import random
-import requests
-from fastapi import FastAPI, HTTPException
+import numpy as np
+import nltk
+import pickle
+import tensorflow as tf
+from fastapi import FastAPI
 from pydantic import BaseModel
-#import fasttext
-from googletrans import Translator
-from transformers import pipeline
-import os
+from nltk.stem import WordNetLemmatizer
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense, Dropout
 
+# Ensure required NLTK data is downloaded
+nltk.download("punkt")
+nltk.download("wordnet")
+
+# Initialize FastAPI app
 app = FastAPI()
 
-class Message(BaseModel):
-    message: str
-    session_id: str = "default"
+# Load intents
+with open("intents.json", "r", encoding="utf-8") as file:
+    data = json.load(file)
 
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-translator = Translator()
-#lang_detector = fasttext.load_model("lid.176.bin")  
+lemmatizer = WordNetLemmatizer()
+ignore_letters = ["?", "!", ".", ","]
 
-file_path = os.path.join(os.path.dirname(__file__), "intents.json")
-with open(file_path, "r", encoding="utf-8") as f:
-    try:
-        intents_data = json.load(f)
-    except json.JSONDecodeError as e:
-        print(f"JSON Decode Error: {e}")
-        intents_data = {"intents": []}
+words, classes, documents = [], [], []
+for intent in data["intents"]:
+    for pattern in intent["patterns"]:
+        word_list = nltk.word_tokenize(pattern)
+        words.extend(word_list)
+        documents.append((word_list, intent["tag"]))
+        if intent["tag"] not in classes:
+            classes.append(intent["tag"])
 
-responses = {}
-candidate_labels = []
-for intent in intents_data["intents"]:
-    tag = intent["tag"]
-    candidate_labels.append(tag)
-    responses[tag] = intent["responses"]
+words = sorted(set(lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_letters))
+classes = sorted(set(classes))
 
-user_sessions = {}
+training = []
+output_empty = [0] * len(classes)
 
-def fetch_esports_data(tag: str):
-    """Fetch esports-related data based on intent tag."""
-    try:
-        if tag == "esports_events":
-            mock_data = {"match_name": "Championship Finals", "time": "3 PM", "team1": "Team A", "team2": "Team B"}
-            return f"Upcoming match: {mock_data['match_name']} at {mock_data['time']} between {mock_data['team1']} and {mock_data['team2']}."
-        elif tag == "esports_registration":
-            return "Registration for esports is open! Fee: $20. Provide your name and email to sign up."
-        elif tag == "esports_contact":
-            return "To contact your opponent, provide your match ID (e.g., M123). I’ll simulate a connection: 'Contact Team B at teamB@example.com'."
-        else:
-            return "Sorry, I couldn’t process that esports request."
-    except Exception as e:
-        print(f"Esports API error: {e}")
-        return "Sorry, I couldn't retrieve esports details at the moment."
+for doc in documents:
+    bag = [1 if w in [lemmatizer.lemmatize(w.lower()) for w in doc[0]] else 0 for w in words]
+    output_row = list(output_empty)
+    output_row[classes.index(doc[1])] = 1
+    training.append([bag, output_row])
 
-def fetch_job_status(tag: str):
-    """Fetch job-related data based on intent tag."""
-    try:
-        if tag == "jobs_openings":
-            mock_data = {"job1": "Video Editor", "job2": "Event Coordinator"}
-            return f"Current openings: {mock_data['job1']} and {mock_data['job2']}. Interested in applying?"
-        elif tag == "jobs_apply":
-            return "To apply, provide your name, email, and desired position (e.g., 'Video Editor'). I’ll record it!"
-        else:
-            return "Sorry, I couldn’t process that job request."
-    except Exception as e:
-        print(f"Jobs API error: {e}")
-        return "Sorry, I couldn't retrieve job details at the moment."
+random.shuffle(training)
+training = np.array(training, dtype=object)
+train_x, train_y = np.array(list(training[:, 0])), np.array(list(training[:, 1]))
 
-def get_response(user_message: str, session_id: str) -> str:
-    """Process user input and generate chatbot response."""
-    if not user_message.strip():
-        return "Please say something so I can assist you!"
+MODEL_FILE = "chatbot_model.h5"
+WORDS_FILE = "words.pkl"
+CLASSES_FILE = "classes.pkl"
 
-    try:
-        lang_prediction = lang_detector.predict(user_message.replace('\n', ' '))
-        lang = lang_prediction[0][0].replace('__label__', '')
-        confidence = lang_prediction[1][0]
-        print(f"Detected language: {lang} (confidence: {confidence:.2f})")
-        if confidence < 0.9:
-            print("Low confidence, defaulting to English")
-            lang = "en"
-    except Exception as e:
-        print(f"Language detection error: {e}")
-        lang = "en"
+try:
+    model = load_model(MODEL_FILE)
+    with open(WORDS_FILE, "rb") as f:
+        words = pickle.load(f)
+    with open(CLASSES_FILE, "rb") as f:
+        classes = pickle.load(f)
+    print("Model loaded successfully!")
+except:
+    print("Training new model...")
 
-    #try:
-        #user_message_en = translator.translate(user_message, dest="en").text if lang != "en" else user_message
-    #except Exception as e:
-        print(f"Translation error: {e}")
-        user_message_en = user_message
+    model = Sequential([
+        Dense(128, activation="relu", input_shape=(len(train_x[0]),)),
+        Dropout(0.5),
+        Dense(64, activation="relu"),
+        Dropout(0.5),
+        Dense(len(classes), activation="softmax")
+    ])
 
-    try:
-        result = classifier(user_message_en, candidate_labels)
-        tag = result["labels"][0]
-        score = result["scores"][0]
-    except Exception as e:
-        print(f"Classifier error: {e}")
-        return "Sorry, something went wrong on my end. Please try again."
+    model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+    model.fit(train_x, train_y, epochs=200, batch_size=5, verbose=1)
 
-    if score < 0.5:
-        response_text = random.choice(responses.get("fallback", ["I'm sorry, I didn’t quite understand that. Could you please rephrase?"]))
-    else:
-        if tag in ["esports_events", "esports_registration", "esports_contact"]:
-            response_text = fetch_esports_data(tag)  
-        elif tag in ["jobs_openings", "jobs_apply"]:
-            response_text = fetch_job_status(tag)  
-        else:
-            response_text = random.choice(responses[tag])
+    model.save(MODEL_FILE)
+    with open(WORDS_FILE, "wb") as f:
+        pickle.dump(words, f)
+    with open(CLASSES_FILE, "wb") as f:
+        pickle.dump(classes, f)
 
-    if session_id not in user_sessions:
-        user_sessions[session_id] = []
-    user_sessions[session_id].append({"user": user_message, "bot": response_text})
+def clean_sentence(sentence):
+    return [lemmatizer.lemmatize(word.lower()) for word in nltk.word_tokenize(sentence)]
 
-    try:
-        #if lang != "en":
-            #return translator.translate(response_text, dest=lang).text
-        return response_text
-    except Exception as e:
-        print(f"Response translation error: {e}")
-        return response_text
+def bag_of_words(sentence):
+    sentence_words = clean_sentence(sentence)
+    return np.array([1 if word in sentence_words else 0 for word in words])
 
-@app.post("/chatbot")
-async def chatbot_endpoint(message: Message):
-    try:
-        bot_response = get_response(message.message, message.session_id)
-        return {"response": bot_response}
-    except Exception as e:
-        print(f"Endpoint error: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+def predict_class(sentence):
+    bow = bag_of_words(sentence)
+    res = model.predict(np.array([bow]))[0]
+    return classes[np.argmax(res)] if np.max(res) > 0.6 else "fallback"
+
+def chatbot_response(msg):
+    tag = predict_class(msg)
+    for intent in data["intents"]:
+        if intent["tag"] == tag:
+            return random.choice(intent["responses"])
+    return "I'm not sure how to respond to that."
+
+class ChatMessage(BaseModel):
+    text: str
+
+@app.post("/chatbot/")
+async def chatbot(message: ChatMessage):
+    user_message = message.text
+    response = chatbot_response(user_message)
+    return {"response": response}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    print("Chatbot is ready! Type 'quit' to exit.")
+    while True:
+        msg = input("You: ")
+        if msg.lower() == "quit":
+            break
+        print("Bot:", chatbot_response(msg))
