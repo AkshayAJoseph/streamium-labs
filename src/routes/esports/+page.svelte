@@ -91,8 +91,8 @@
         padding: 1rem 2rem;
         border-radius: 10rem;
         text-align: center;
-        background: white;
-        color: black;
+        background: var(--color-white);
+        color: var(--color-black);
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);
         font-size: 1.2rem;

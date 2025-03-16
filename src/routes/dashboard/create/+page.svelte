@@ -135,7 +135,7 @@
         padding: 1rem 2rem;
         background: #111;
         -webkit-appearance: none;
-        color: white;
+        color: var(--color-white);
         border: 0;
         border-radius: 10rem;
         font-family: "Inter";
@@ -151,7 +151,7 @@
         width: 100%;
         background: #111;
         border: 0;
-        color: white;
+        color: var(--color-white);
         margin-top: 1rem;
         font-family: "Inter";
         font-weight: 600;
@@ -159,8 +159,8 @@
     }
     .form input[type="submit"] {
         margin-top: 5rem;
-        background: white;
-        color: black;
+        background: var(--color-white);
+        color: var(--color-black);
     }
     .card {
         width: 50%;
@@ -184,7 +184,7 @@
         padding: 1rem 2rem;
         background: #111;
         -webkit-appearance: none;
-        color: white;
+        color: var(--color-white);
         border: 0;
         border-radius: 10rem;
         font-family: "Inter";
@@ -200,7 +200,7 @@
         width: 100%;
         background: #111;
         border: 0;
-        color: white;
+        color: var(--color-white);
         margin-top: 1rem;
         font-family: "Inter";
         font-weight: 600;
@@ -208,8 +208,8 @@
     }
     .form input[type="submit"] {
         margin-top: 5rem;
-        background: white;
-        color: black;
+        background: var(--color-white);
+        color: var(--color-black);
     }
     .card {
         width: 50%;

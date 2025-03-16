@@ -90,7 +90,7 @@
 
     .links__row.super {
         background: #66666633;
-        color: white;
+        color: var(--color-white);
     }
 
     .links__row p {
@@ -105,7 +105,7 @@
     }
 
     .links__row:hover p {
-        color: white;
+        color: var(--color-white);
     }
 
     .links__row:hover img {

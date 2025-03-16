@@ -4,6 +4,8 @@
     --color-labs: #ffc481;
     --color-esports: #ff76dd;
     --color-text: #666;
+    --color-white: #fff;
+    --color-black: #000;
 }
 
 * {

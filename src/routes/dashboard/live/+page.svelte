@@ -91,9 +91,9 @@
 
     .btn--create {
         padding: 1rem 2rem;
-        background: white;
+        background: var(--color-white);
         width: fit-content;
-        color: #000;
+        color: var(--color-black);
         font-weight: 500;
         margin: 2rem 0;
         border-radius: 10rem;

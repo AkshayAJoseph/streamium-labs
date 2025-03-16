@@ -11,3 +11,13 @@
 + multi lang support
 + video streaming integration
 + animations
+
+
+- dark mode
+- contact styling
+- services -> individual
+- blog fix
+- widget
++ matchmaking
++ profile
++ streaming

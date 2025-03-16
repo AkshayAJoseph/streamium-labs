@@ -63,8 +63,8 @@
     }
 
     .solid {
-        background: white;
-        color: black;
+        background: var(--color-white);
+        color: var(--color-black);
         height: min-content;
         padding: 0.5rem 1rem;
         border-radius: 1rem;
