@@ -15,15 +15,19 @@
 <h1>Past Media projects</h1>
 
 <ul>
-  {#each mediaItems as item}
-    <li>
-      <strong>Type:</strong>
-      {item.type} |
-      <strong>Status:</strong>
-      {item.status} |
-      <strong>Price:</strong> ${item.price}
-    </li>
-  {/each}
+  {#if data}
+    {#each data as item}
+      <li>
+        <strong>Type:</strong>
+        {item.type} |
+        <strong>Status:</strong>
+        {item.status} |
+        <strong>Price:</strong> ${item.price}
+      </li>
+    {/each}
+  {:else}
+    <p>loading...</p>
+  {/if}
 </ul>
 <a href="/features/services/add">
   <button>add</button>
