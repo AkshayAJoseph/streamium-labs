@@ -34,7 +34,8 @@
     }
 
     article {
-        padding: 10rem;
+        padding: 15rem;
+        background: #000;
     }
 
     a:last-child article {

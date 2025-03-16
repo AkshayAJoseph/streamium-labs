@@ -1,12 +1,12 @@
 <script>
     import Nav from "$lib/components/Nav.svelte";
-    import { login } from "../../script";
+    import { signup } from "../../script";
 
     let email = $state("");
     let password = $state("");
     const onclick = async () => {
         const data = { email, password };
-        await login(data);
+        await signup(data);
     };
 </script>
 
