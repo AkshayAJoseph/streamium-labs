@@ -15,8 +15,13 @@ nltk.download("wordnet", quiet=True)
 
 app = FastAPI()
 
-with open("intents.json", "r", encoding="utf-8") as file:
-    data = json.load(file)
+try:
+    with open("intents.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+except FileNotFoundError:
+    raise Exception("intents.json not found in the current directory")
+except json.JSONDecodeError as e:
+    raise Exception(f"Error decoding intents.json: {e}")
 
 lemmatizer = WordNetLemmatizer()
 ignore_letters = ["?", "!", ".", ","]
@@ -50,7 +55,7 @@ def prepare_and_train_model():
 
     random.shuffle(training)
     training = np.array(training, dtype=object)
-    train_x, train_y = np.array(list(training[:, 0])), np.array(list(training[:, 1]))
+    train_x, train_y = np.array(list(training[:, 0]), dtype=np.float32), np.array(list(training[:, 1]), dtype=np.float32)
 
     model = Sequential([
         Dense(128, activation="relu", input_shape=(len(train_x[0]),)),
@@ -77,28 +82,48 @@ try:
     with open(CLASSES_FILE, "rb") as f:
         classes = pickle.load(f)
     print("Model loaded successfully!")
-except:
-    print("Training new model...")
+except Exception as e:
+    print(f"Model loading failed: {e}. Training new model...")
     model = prepare_and_train_model()
 
 def clean_sentence(sentence):
-    return [lemmatizer.lemmatize(word.lower()) for word in nltk.word_tokenize(sentence)]
+    try:
+        return [lemmatizer.lemmatize(word.lower()) for word in nltk.word_tokenize(sentence)]
+    except Exception as e:
+        print(f"Error cleaning sentence: {e}")
+        return []
 
 def bag_of_words(sentence):
     sentence_words = clean_sentence(sentence)
-    return np.array([1 if word in sentence_words else 0 for word in words])
+    if not sentence_words:
+        raise ValueError("Failed to process sentence into words")
+    bow = np.array([1 if word in sentence_words else 0 for word in words], dtype=np.float32)
+    if len(bow) != len(words):
+        raise ValueError(f"Bag of words length ({len(bow)}) does not match expected ({len(words)})")
+    return bow
 
 def predict_class(sentence):
-    bow = bag_of_words(sentence)
-    res = model.predict(np.array([bow]))[0]
-    return classes[np.argmax(res)] if np.max(res) > 0.6 else "fallback"
+    try:
+        bow = bag_of_words(sentence)
+        res = model.predict(np.array([bow]), verbose=0)[0]
+        max_prob = np.max(res)
+        if max_prob > 0.6:
+            return classes[np.argmax(res)]
+        return "fallback"
+    except Exception as e:
+        print(f"Prediction error: {e}")
+        return "fallback"
 
 def chatbot_response(msg):
-    tag = predict_class(msg)
-    for intent in data["intents"]:
-        if intent["tag"] == tag:
-            return random.choice(intent["responses"])
-    return "I'm not sure how to respond to that."
+    try:
+        tag = predict_class(msg)
+        for intent in data["intents"]:
+            if intent["tag"] == tag:
+                return random.choice(intent["responses"])
+        return "I'm not sure how to respond to that."
+    except Exception as e:
+        print(f"Chatbot response error: {e}")
+        return "I'm not sure how to respond to that."
 
 class ChatMessage(BaseModel):
     text: str
@@ -107,11 +132,13 @@ class ChatMessage(BaseModel):
 async def chatbot(message: ChatMessage):
     try:
         user_message = message.text
+        if not user_message.strip():
+            return {"response": "Please say something!"}
         response = chatbot_response(user_message)
         return {"response": response}
     except Exception as e:
         print(f"Endpoint error: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
